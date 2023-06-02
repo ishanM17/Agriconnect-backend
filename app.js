@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const userRoutes = require('./routes/user.Routes');
+const userRoutes = require('./routes/user.routes');
 
 const app = express();
 
@@ -16,3 +16,20 @@ app.use(express.urlencoded({extended: true}));
 app.use(cors(corsOptions));
 app.use(express.json());
 
+app.use('/user', userRoutes);
+
+app.get('/', (req, res)=>{
+    res.send('API is up and running...');
+});
+
+mongoose.set('strictQuery', false);
+
+mongoose
+    .connect(process.env.MONGO_URI)
+    .then((res) => console.log('Connected to MongoDB...'))
+    .catch((err) => console.log(err));
+
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`server is listning on port ${port}...`);
+});
