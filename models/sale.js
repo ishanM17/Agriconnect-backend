@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const user = require('./user');
 const Schema = mongoose.Schema;
 
 const saleSchema = new Schema({
@@ -20,7 +19,7 @@ const saleSchema = new Schema({
         type: Number,
         required: [true, "Crop quantity is required"]
     },
-    farmer_address: {
+    farmer_address : {
         type: String,
         required: [true, "Farmer address is required"]
     },
@@ -35,9 +34,9 @@ const saleSchema = new Schema({
     buyer_address: {
         type: String,
     },
-    transporter: {
+    transport: {
         type: String,
-        ref: user
+        ref: "User"
     }
 });
 

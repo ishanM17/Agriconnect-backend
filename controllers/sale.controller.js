@@ -3,12 +3,12 @@ const Sale = require('../models/sale');
 
 const createPost = async (req, res) => {
     try{
-        const { crop, quantity, address, price, date_of_harvest } = req.body;
+        const { crop, quantity, farmer_address, price, date_of_harvest } = req.body;
         const newPost = new Sale({
             farmer: req.user._id,
             crop: crop,
             quantity: quantity,
-            address: address,
+            farmer_address: farmer_address,
             price: price,
             date_of_harvest: date_of_harvest
         });
