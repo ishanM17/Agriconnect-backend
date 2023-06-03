@@ -2,8 +2,10 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+
 const userRoutes = require('./routes/user.routes');
-const rentRoutes = require('./routes/rent.routes')
+const rentRoutes = require('./routes/rent.routes');
+const saleRoutes = require('./routes/sale.routes');
 
 const app = express();
 
@@ -19,6 +21,7 @@ app.use(express.json());
 
 app.use('/user', userRoutes);
 app.use('/rent', rentRoutes);
+app.use('/sale', saleRoutes);
 
 app.get('/', (req, res)=>{
     res.send('API is up and running...');
