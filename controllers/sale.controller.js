@@ -34,7 +34,7 @@ const getAll = async (req, res) => {
 const addBuyer = async (req, res) => {
     //this function is for Buyer to accept the Sale request
     try{
-        const soldPost =  await Sale.findOneAndUpdate({buyer: req.body.FarmerId, farmer: req.body.farmer}, {transporter: req.user._id});
+        const soldPost =  await Sale.findOneAndUpdate({buyer: req.body.FarmerId}, {buyer: req.user._id});
         res.status(200).json(soldPost);
     } catch (err) {
         return res.status(500).json({ error: err.message });
@@ -44,7 +44,7 @@ const addBuyer = async (req, res) => {
 const addTransporter = async (req, res) => {
     //this function is for transport facilitator to accept the transport request
     try{
-        const soldPost =  await Sale.findOneAndUpdate({buyer: req.body.FarmerId}, );
+        const soldPost =  await Sale.findOneAndUpdate({buyer: req.body.FarmerId, farmer: req.body.farmer    }, {transporter: req.user._id});
         res.status(200).json(soldPost);
     } catch (err) {
         return res.status(500).json({ error: err.message });
@@ -53,7 +53,7 @@ const addTransporter = async (req, res) => {
 
 const getFarmerPost = async (req, res) => {
     try{
-        const farmerPost = await Sale.findOne({farmer: req.params['id']});
+        const farmerPost = await Sale.find({farmer: req.params['id']}).sort({_id: -1});
         if(!farmerPost){
             return res.status(200).json({ message: 'No sale postings available' });
         }

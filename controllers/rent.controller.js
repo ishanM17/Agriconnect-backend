@@ -3,7 +3,7 @@ const Rent = require('../models/rent');
 
 const createPost = async (req, res) => {
     try{
-        const { equipment, date, duration, address, budget, borrower} = req.body;
+        const { equipment, date, duration, address, budget } = req.body;
 //borrower is filling the form
         const newPost = new Rent({
             borrower: req.user._id,
@@ -44,7 +44,7 @@ const addLender = async (req, res) => {
 
 const getBorrowerPost = async (req, res) => {
     try{
-        const borrowerPosts = await Rent.findOne({borrower: req.params['id']});
+        const borrowerPosts = await Rent.find({borrower: req.params['id']}).sort({_id: -1}); 
         if(!borrowerPosts){
             return res.status(200).json({ message: 'No rent postings available' });
         }
